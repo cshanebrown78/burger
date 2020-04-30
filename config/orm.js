@@ -51,6 +51,7 @@ var orm = {
             cb(result);
         });
     },
+    
     updateOne: function(table, objColVals, condition, cb) {
         var queryString = "UPDATE " + table;
 
