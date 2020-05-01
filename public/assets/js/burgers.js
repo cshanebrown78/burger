@@ -2,10 +2,15 @@ $(function() {
 
     $(".create-form").on("submit", function(event) {
         event.preventDefault();
+
+        var test = $("#newburger").val().trim();
+        console.log(test)
     
         var newBurger = {
-            burger_name: $("#newburger").val().trim(),devoured: 0
+            burger_name: $("#newburger").val().trim(), 
+            devoured: 0
         };
+        console.log("burger-" + newBurger)
         $.ajax("/api/burgers", {
             type: "POST",
             data: newBurger

@@ -26,9 +26,11 @@ function printQuestionMarks(num) {
         arr.push(key + "=" + value);
       }
     }
+    console.log(arr.toString());
   
     // translate array of strings to a single comma-separated string
     return arr.toString();
+    
   }
 
 var orm = {
@@ -42,15 +44,23 @@ var orm = {
         })
     },
     insertOne: function(table, cols, vals, cb) {
-        var queryString = 
-        "INSERT INTO " + 
-        table + 
-        "(" +
-        cols.toString() +
-        ") " +
-        "VALUES (" +
-        printQuestionMarks(vals.length) +
-        ") ";
+      var queryString = "INSERT INTO " + table;
+
+        queryString += " (";
+        queryString += cols.toString();
+        queryString += ") ";
+        queryString += "VALUES (";
+        queryString += printQuestionMarks(vals.length);
+        queryString += ") ";
+        // var queryString = 
+        // "INSERT INTO " + 
+        // table + 
+        // " (" +
+        // cols.toString() +
+        // ") " +
+        // "VALUES (" +
+        // printQuestionMarks(vals.length) +
+        // ") ";
         console.log(queryString)
         connection.query(queryString, function(err, result) {
             if (err) {
