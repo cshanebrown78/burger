@@ -1,16 +1,16 @@
 var connection = require("../config/connection.js");
 
-// function printQuestionMarks(num) {
-//     var arr = [];
+function printQuestionMarks(num) {
+    var arr = [];
   
-//     for (var i = 0; i < num; i++) {
-//       arr.push("?");
-//     }
+    for (var i = 0; i < num; i++) {
+      arr.push("?");
+    }
   
-//     return arr.toString();
-//   }
+    return arr.toString();
+  }
   
-//   // Helper function to convert object key/value pairs to SQL syntax
+  // Helper function to convert object key/value pairs to SQL syntax
   function objToSql(ob) {
     var arr = [];
   
@@ -32,8 +32,8 @@ var connection = require("../config/connection.js");
   }
 
 var orm = {
-    all: function(affectedTable, cb) {
-        var queryString = "SELECT * FROM " + affectedTable + ";";
+    selectAll: function(table, cb) {
+        var queryString = "SELECT * FROM " + table + ";";
         connection.query(queryString, function(err, result) {
             if (err) {
                 throw err;
@@ -41,8 +41,16 @@ var orm = {
             cb(result);
         })
     },
-    insertOne: function(table, vals, cb) {
-        var queryString = "INSERT INTO " + table + "(burger_name, devoured) VALUES (?,?)";
+    insertOne: function(table, cols, vals, cb) {
+        var queryString = 
+        "INSERT INTO " + 
+        table + 
+        "(" +
+        cols.toString() +
+        ") " +
+        "VALUES (" +
+        printQuestionMarks(vals.length) +
+        ") ";
         console.log(queryString)
         connection.query(queryString, function(err, result) {
             if (err) {
@@ -53,12 +61,13 @@ var orm = {
     },
 
     updateOne: function(table, objColVals, condition, cb) {
-        var queryString = "UPDATE " + table;
-
-        queryString += " SET ";
-        queryString += objToSql(objColVals);
-        queryString += " WHERE ";
-        queryString += condition;
+        var queryString = 
+        "UPDATE " + 
+        table +
+        " SET " +
+        objToSql(objColVals) +
+        " WHERE " +
+        condition;
 
         connection.query(queryString, function(err, result) {
             if (err) {
