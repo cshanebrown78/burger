@@ -7,7 +7,7 @@ router.get("/", function(req, res) {
         var hdbrsObject = {
             burgers: data
         };
-        console.log(hdbrsObject);
+        // console.log(hdbrsObject);
         res.render("index", hdbrsObject);
     });
 });
@@ -25,7 +25,7 @@ router.post("/api/burgers", function(req,res) {
 router.put("/api/burgers/:id", function(req, res) {
     var condition = "id = " + req.params.id;
 
-    console.log("condition", condition);
+    // console.log("condition", condition);
 
     burger.updateOne({
         devoured: req.body.devoured

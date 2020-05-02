@@ -52,17 +52,9 @@ var orm = {
         queryString += "VALUES (";
         queryString += printQuestionMarks(vals.length);
         queryString += ") ";
-        // var queryString = 
-        // "INSERT INTO " + 
-        // table + 
-        // " (" +
-        // cols.toString() +
-        // ") " +
-        // "VALUES (" +
-        // printQuestionMarks(vals.length) +
-        // ") ";
+        
         console.log(queryString)
-        connection.query(queryString, function(err, result) {
+        connection.query(queryString, vals, function(err, result) {
             if (err) {
                 throw err;
             }
