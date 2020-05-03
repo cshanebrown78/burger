@@ -1,4 +1,4 @@
-$(function() {
+// $(function() {
 
     $(".create-form").on("submit", function(event) {
         event.preventDefault();
@@ -25,13 +25,15 @@ $(function() {
         };
         $.ajax("/api/burgers/" + id, {
             type: "PUT",
-            data: isDevoured
+            data: isDevoured,
+
         }).then(function() {
             console.log("Burger Devoured");
             location.reload();
+
         })
     });
 
     
     
-});
+// });
