@@ -28,7 +28,7 @@ function printQuestionMarks(num) {
         arr.push(key + "=" + value);
       }
     }
-    console.log(arr.toString());
+    
   
     // translate array of strings to a single comma-separated string
     return arr.toString();
@@ -56,7 +56,7 @@ var orm = {
         queryString += printQuestionMarks(vals.length);
         queryString += ") ";
         
-        console.log(queryString)
+        
         connection.query(queryString, vals, function(err, result) {
             if (err) {
                 throw err;
